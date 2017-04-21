@@ -13,6 +13,7 @@ module.exports = function (grunt) {
                     'unit_test/announcement_test.js',
                     'unit_test/message_test.js',
                     'unit_test/privateMessage_test.js',
+                    'unit_test/notification_test.js'
                 ], // a folder works nicely
                 options: {
                     reporter: 'spec',
@@ -26,7 +27,8 @@ module.exports = function (grunt) {
                     'integration_test/api_status.js',
                     'integration_test/api_announcement.js',
                     'integration_test/api_message.js',
-                    'integration_test/api_privateMessage.js'
+                    'integration_test/api_privateMessage.js',
+                    'integration_test/notification_test.js'
                 ], // a folder works nicely
                 options: {
                     reporter: 'spec',
@@ -65,6 +67,16 @@ module.exports = function (grunt) {
                     ui: 'tdd'
                 },
                 src:['unit_test/**/status_test.js']
+            },
+            notification_test:{
+                options:{
+                    reporter: 'spec',
+                    captureFile: 'unit_test/test_report/testNotificationResults.txt',
+                    quiet: false,
+                    clearRequireCache: false,
+                    ui: 'tdd'
+                },
+                src:['unit_test/**/notification_test.js']
             },
             announcement_test:{
                 options:{
@@ -133,6 +145,7 @@ module.exports = function (grunt) {
     grunt.registerTask('announcement_test',['mochaTest:announcement_test']);
     grunt.registerTask('message_test',['mochaTest:message_test']);
     grunt.registerTask('privateMessage_test',['mochaTest:privateMessage_test']);
+    grunt.registerTask('notification_test',['mochaTest:notification_test']);
 
     //Shippable
     grunt.registerTask('shippable', ['mochaTest:shippable', 'mocha_istanbul']);
