@@ -196,18 +196,22 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="reviewModal" ng-controller="notifyController" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal fade" id="reviewModal" ng-controller="notifyController" tabindex="-1" role="dialog"
+             aria-labelledby="confirmModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <ul class="list-group">
-                            <!--<li ng-repeat="notification in notifications | limitTo: limitNum | limitTo: -10 " class="list-group-item">-->
-                                <!--<span>{{notification.username}}</span> Posted :-->
-                                <!--<span>{{notification.content}}</span>-->
-                                <!--<b class="badge">{{notification.type}},  {{notification.timestamp}}</b>-->
-                            <!--</li>-->
-                            <li class="list-group-item">A</li>
-                        </ul>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12 well">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="notification in notifications">
+                                        <span>{{notification.username}}</span> Posted :
+                                        <span>{{notification.content}}</span>
+                                        <b class="badge">{{notification.type}}, {{notification.timestamp}}</b>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>

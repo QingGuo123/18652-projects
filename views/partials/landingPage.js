@@ -328,12 +328,11 @@ app.controller('lobbyPageController', function($scope, $state, $location) {
         };
         $scope.getNotifications = function () {
             $http.get('/messages/notification').then(function successCallback(response) {
-
+                console.log(response.data.notifications[0].content);
                 $scope.totalNum = response.data.notifications.length;
                 $scope.limitNum = $scope.totalNum;
-                $scope.username = response.data.notifications[0].username;
-                $scope.reviewcontent = response.data.notifications[0].content;
-                console.log($scope.reviewcontent+$scope.username);
+                $scope.notifications = response.data.notifications;
+                //$scope.currentNotification = "";
             }, function errorCallback(response) {
                 window.location.href = "/index.html";
             });

@@ -14,7 +14,7 @@ module.exports = {
             "userid INTEGER NOT NULL," +
             "content TEXT," +
             "timestamp CHAR(256) NOT NULL," +
-            "type CHAR(256)," +
+            "type TEXT," +
             "FOREIGN KEY (userid) REFERENCES User(id)" +
             ");";
         return sql;
@@ -31,7 +31,7 @@ module.exports = {
     },
 
     insertnotification: function() {
-        var sql = "INSERT INTO Notification (userid, content, timestamp, type) VALUES ((SELECT id FROM User WHERE username = ?), ?, ?, ?)";
+        var sql = "INSERT INTO Notification (userid, content, timestamp, type) VALUES ((SELECT id FROM User WHERE username = ?), ?, ?, ?);";
         return sql;
     },
 

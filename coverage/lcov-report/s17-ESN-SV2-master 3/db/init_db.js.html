@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for s17-ESN-SV2-master 3/db/init_db.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">s17-ESN-SV2-master 3/db/</a> init_db.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.18% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>41/44</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>4/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">85.71% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.18% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>41/44</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+&nbsp;
+var fs = require("fs");
+var sqlite3 = require('sqlite3').verbose();
+var config = require('../config/global.js');
+&nbsp;
+var sql_user = require('../db/sql_user');
+var sql_message = require('../db/sql_message');
+var sql_announcement = require('../db/sql_announcement');
+var sql_status = require('../db/sql_status');
+var sql_privateMessage = require('../db/sql_privateMessage');
+var sql_notification = require('../db/sql_notification');
+&nbsp;
+var delete_db_when_run = config.test_config.delete_db_when_run;
+&nbsp;
+module.exports = {
+&nbsp;
+    initDB: function(db_path) {
+        console.log("initialize database " + db_path);
+        var db = new sqlite3.Database(db_path);
+        var exists = fs.existsSync(db_path);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (exists &amp;&amp; delete_db_when_run) {
+            fs.unlinkSync(db_path);
+            console.log("delete database succeed");
+            db = new sqlite3.Database(db_path);
+            db = createDBAndTables(db, function(){});
+        }
+        else <span class="cstat-no" title="statement not covered" >if (!exists) {</span>
+<span class="cstat-no" title="statement not covered" >            db = new sqlite3.Database(db_path);</span>
+<span class="cstat-no" title="statement not covered" >            db = createDBAndTables(db, <span class="fstat-no" title="function not covered" >function(){</span>});</span>
+        }
+        return db;
+    },
+&nbsp;
+    resetTestDB: function(callback) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (config.test_config.is_test) {
+            var db = new sqlite3.Database(config.db_config.test_db.path);
+            db.serialize(function() {
+                db.run(sql_privateMessage.dropTable());
+                db.run(sql_status.dropTable());
+                db.run(sql_announcement.dropTable());
+                db.run(sql_notification.dropTable());
+                db.run(sql_message.dropTable());
+                db.run(sql_user.dropTable());
+                createDBAndTables(db, callback);
+                console.log("reset test database succeed");
+            });
+        }
+    }
+&nbsp;
+};
+&nbsp;
+function createDBAndTables(db, callback) {
+    db.serialize(function() {
+        db.run(sql_user.createTable());
+        db.run(sql_message.createTable());
+        db.run(sql_notification.createTable());
+        db.run(sql_announcement.createTable());
+        db.run(sql_status.createTable());
+        db.run(sql_privateMessage.createTable(), callback);
+    });
+    console.log("create database &amp; tables succeed");
+    return db;
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Apr 21 2017 14:37:34 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
