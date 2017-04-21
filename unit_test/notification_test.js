@@ -1,7 +1,7 @@
 var expect = require('expect.js');
 
 var User = require('../models/user.js');
-var Message = require('../models/message.js');
+var Message = require('../models/notification.js');
 
 var init_db = require('../db/init_db');
 var config = require('../config/global.js');
