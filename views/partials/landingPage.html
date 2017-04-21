@@ -1,0 +1,328 @@
+<head>
+    <style type="text/css">
+    @charset "UTF-8";
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak,
+    .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+    
+    ng\:form {
+        display: block;
+    }
+
+    body .modal-admin {
+        /* new custom width */
+        width: 750px;
+        /* must be half of the width, minus scrollbar on the left (30px) */
+        margin-left: -375px;
+    }
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: -1px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        font-size: 10pt;
+    }
+
+
+    .ng-animate-shim {
+        visibility: hidden;
+    }
+    
+    .ng-anchor {
+        position: absolute;
+    }
+    
+    #navbar {
+        background: -moz-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #008ae6), color-stop(100%, #66c2ff));
+        background: -webkit-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -o-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -ms-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: linear-gradient(to bottom, #008ae6 0%, #66c2ff 100%);
+    }
+    
+    #navBtn1 {
+        font-family: 'Baloo', cursive;
+        font-size: 22px;
+    }
+    
+    #navBtn2 {
+        font-family: 'Baloo', cursive;
+        font-size: 22px;
+    }
+    
+    #navBtn3 {
+        font-family: 'Baloo', cursive;
+        font-size: 22px;
+    }
+    
+    #btn1 {
+        background: -moz-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #008ae6), color-stop(100%, #66c2ff));
+        background: -webkit-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -o-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -ms-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: linear-gradient(to bottom, #008ae6 0%, #66c2ff 100%);
+        color: white;
+        /*border: 1px white solid;*/
+    }
+    
+    #btn2 {
+        background: -moz-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #008ae6), color-stop(100%, #66c2ff));
+        background: -webkit-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -o-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -ms-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: linear-gradient(to bottom, #008ae6 0%, #66c2ff 100%);
+        color: white;
+    }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">-->
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="bootstrap-material-design/dist/css/ripples.min.css">
+    <link rel="stylesheet" href="material-design-icons/iconfont/material-icons.css">
+    <link rel="stylesheet" href="bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo|Roboto" rel="stylesheet">
+    <!-- title-->
+    <title>S17-SV2-ESN</title>
+    <!-- additional stylesheets for each page-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://use.fontawesome.com/cc7f6453e9.js"></script>
+    <script type="text/javascript" src="landingPage.js"></script>
+    <script src="socket.io-client/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
+
+</head>
+
+<body ng-app="ESNApp" id="landingPageBody" style="display: none;">
+<div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="messageid"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" >Contract</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">CONFIRM</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div ui-view class="container-fluid ng-scope">
+        <div id="landing-navbar" ng-controller="navbarController" class="ng-scope">
+            <div id="navBar" class="navbar navbar-success">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" data-toggle="collapse" data-target="#test1" class="navbar-toggle">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="javascript:void(0)">S17-ESN-SV2</a>
+                    </div>
+                    <div id="test1" class="collapse navbar-collapse navbar-warning-collapse" aria-expanded="false" style="height: 1px;">
+                        <ul class="nav navbar-nav">
+                            <li ng-class="navLobby"><a href="javascript:void(0)" ng-click="landingPage()">Homepage</a></li>
+                            <li ng-class="navChatPublicly"><a href="javascript:void(0)" ng-click="chatPublicly()">Chat Publicly <span class="badge ng-binding"></span></a></li>
+                            <li ng-class="navNotify"><a href="javascript:void(0)"  data-toggle="modal" data-target="#NotifyModal">Notification <span class="badge ng-binding"></span></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li id="search_button"><a href="javascript: void(0)" data-toggle="modal" data-target="#search_modal" ng-click="search()"><span class="glyphicon glyphicon-search"></span></a></li>
+                            <li><a href="javascript:void(0)">{{curUser}}</a></li>
+                            <li><a id="logout" href="javascript:void(0)" ng-click="logout()">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" ng-controller="notifyController" id="NotifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Notification</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <!--<label for="recipient-name" class="form-control-label">Recipient:</label>-->
+                                <!--<input type="text" class="form-control" placeholder="Message" id="recipient-name">-->
+                                <textarea class="form-control" ng-model="message" placeholder="Message" rows="3"></textarea>
+                                <p>{{validation.message()}}</p>
+                            </div>
+                        </form>
+
+                        <!--<div ng-app="ESNApp" ng-controller="myCtrl">-->
+                        <label for="typeSelect"> Type: </label>
+                        <select id="typeSelect" ng-init="selectedType = types[1]" ng-model="selectedType">
+                            <h2>Your Status</h2><option ng-repeat="x in types">{{x}}</option>
+                        </select>
+
+                        <label for="soundSelect">Sound: </label>
+                        <select id="soundSelect" ng-init="selectedSound = sound[1]"  ng-model="selectedSound">
+                            <option ng-repeat="x in sound">{{x}}</option>
+                        </select>
+
+                        <!--</div>-->
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" ng-click="getNotifications()" data-target="#reviewModal" data-toggle="modal">Review</button>
+                        <button type="button" class="btn btn-primary"  ng-click="postNotification()"ng-disabled="logindisable = passworddisable" data-toggle="notifymodal" >Send message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="reviewModal" ng-controller="notifyController" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            <!--<li ng-repeat="notification in notifications | limitTo: limitNum | limitTo: -10 " class="list-group-item">-->
+                                <!--<span>{{notification.username}}</span> Posted :-->
+                                <!--<span>{{notification.content}}</span>-->
+                                <!--<b class="badge">{{notification.type}},  {{notification.timestamp}}</b>-->
+                            <!--</li>-->
+                            <li class="list-group-item">A</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="userStatus" ng-controller="statusController" class="col-xs-12">
+            <h2>Your Status</h2>
+            <form class="ng-valid ng-dirty ng-valid-parse">
+                <div class="form-group">
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" ng-model="status" name="statusRadios" value="Ok" checked="checked" class="ng-valid ng-not-empty ng-dirty ng-touched"><span class="circle"></span><span class="check"></span><span class="circle"></span>Normal</label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" ng-model="status" name="statusRadios" value="Help" class="ng-valid ng-not-empty ng-dirty ng-touched ng-valid-parse"><span class="circle"></span><span class="check"></span><span class="circle"></span>Help</label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" ng-model="status" name="statusRadios" value="Emergency" class="ng-valid ng-not-empty ng-dirty ng-touched"><span class="circle"></span><span class="check"></span><span class="circle"></span>Emergency</label>
+                    </div>
+                    <div>
+                        <button ng-click="updateStatus()" class="btn btn-primary">Update Status</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="input-group" class="col-xs-12">
+            <div class="radio radio-primary col-xs-12">
+                <h2>Search</h2>
+                <label><span><i class="fa fa-search" aria-hidden="true"></i></span>Search by Status</label>
+                <br>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="searchStatus" name="statusRadios" value="Normal" checked="checked" class="ng-valid ng-not-empty ng-dirty ng-touched"><span class="circle"></span><span class="check"></span><span class="circle"></span>Normal</label>
+                <label>
+                    <input type="radio" ng-model="searchStatus" name="statusRadios" value="Help" class="ng-valid ng-not-empty ng-dirty ng-touched ng-valid-parse"><span class="circle"></span><span class="check"></span><span class="circle"></span>Help</label>
+                <label>
+                    <input type="radio" ng-model="searchStatus" name="statusRadios" value="Emergency" class="ng-valid ng-not-empty ng-dirty ng-touched"><span class="circle"></span><span class="check"></span><span class="circle"></span>Emergency</label>
+                <br>
+                <br>
+                <label><span><i class="fa fa-search" aria-hidden="true"></i></span>Search by Username</label>
+                <label>
+                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon3" ng-model="searchUsername">
+                </label>
+            </div>
+        </div>
+        <div ng-controller="userDirectoryController">
+            <div class="col-xs-12" ng-show="chatPrivateBool">
+                <div class="col-xs-12 col-md-12 col-lg-12 well">
+                    <h2 id="chatPrivatelyHeader" align="left">Private Chatting <h4>You are chatting with {{chatWithWhom}}</h4></h2>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Search Private Message" aria-describedby="basic-addon1" ng-model="searchPriMsg">
+                    </div>
+                    <div class="form-group has-feedback has-feedback-left" ng-model="limitNum">
+                        <input id="previousPrivateMsg" autocomplete="off" value="Previous" type="submit" ng-click="previousPrivateMsg()" class="btn btn-primary btn-block">
+                    </div>
+                    <ul class="list-group">
+                        <li ng-repeat="privateMsg in privateMsgs | limitTo: limitNum | limitTo: -10 | filter : (stopwords.indexOf(searchPriMsg) !== -1 ? 'glhhlg' : searchPriMsg)" class="list-group-item">
+                            <span><i class="{{privateMsg.status_code}}" style="color:{{privateMsg.iconcolor}};"></i>  {{privateMsg.sender}} said to {{privateMsg.receiver}}: </span>
+                            <span>{{privateMsg.content}}</span><b class="badge"><span>{{privateMsg.location}}, </span>{{privateMsg.timestamp|date : 'MM/dd/yyyy HH:mm:ss'}}</b>
+                        </li>
+                    </ul>
+                    <div class="form-group has-feedback has-feedback-left" ng-model="limitNum">
+                        <input id="nextPrivateMsg" autocomplete="off" value="Next" type="submit" ng-click="nextPrivateMsg()" class="btn btn-primary btn-block">
+                    </div>
+                    <form id="chatPrivatelyForm" name="chatPrivatelyForm" class="form-horizontal ng-pristine ng-valid">
+                        <div class="form-group has-feedback has-feedback-left is-empty">
+                            <div class="input-group"><span class="input-group-addon"><i class="material-icons">question_answer</i><input name="message" type="text" ng-model="currentChatPrivatelyMsg" class="form-control ng-pristine ng-untouched ng-valid ng-empty"></span></div>
+                        </div>
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input id="sendPrivateMsg" autocomplete="off" value="Send Private Message" type="submit" ng-click="sendPrivateMsg()" class="btn btn-success">
+                            <input id="sendPrivateMsg" autocomplete="off" value="Exit" type="submit" ng-click="exit()" class="btn btn-success" align="right">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="userDirectory" class="col-xs-12">
+                <h2>User Directory</h2>
+                <div class="list-group">
+                    <div>
+                        <div ng-repeat="user in users | filter : searchStatus | filter : searchUsername">
+                            <!-- ng-repeat -->
+                            <div class="row">
+                                <div class="col-xs-9 col-md-9">
+                                    <div class="list-group-item">
+                                        <div class="row-content">
+                                            <h4 type="button">{{user.username}}</h4>
+                                            <p class="ng-binding">AcountStatus: {{user.accountstatus}}</p>
+                                            <p class="ng-binding">{{user.onlinestatus}}</p>
+                                            <p class="ng-binding">
+                                                Status: {{user.status.status_code}}, <span style="font-size:80%;">Location: {{user.status.location == "" ? "Unset" : user.status.location}}, Timestamp: {{user.status.timestamp == "" ? "Unset" : user.status.timestamp|date : 'MM/dd/yyyy HH:mm:ss'}}</span>
+                                            </p>
+                                            <p class="ng-binding">
+                                                Unread: {{user.newpms}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-3">
+                                    <div>
+                                        <button id="btn3" type="button" class="btn btn-default"><i class="fa fa-user" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div>
+                                        <button id="btn4" type="button" class="btn btn-default" ng-click="chatWithSb(user.username)" ng-model="chatPrivateBool"><i class="fa fa-commenting-o" aria-hidden="true"></i></button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="list-group-separator"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>

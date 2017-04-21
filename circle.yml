@@ -1,0 +1,57 @@
+machine:
+  node:
+    version: 6.9.4
+
+# merge master before testing to make sure all tests pass
+# with the updated version of master
+checkout:
+   post:
+   # Sometimes git might ask for your identity and block the build. Add one valid account here:
+    - git config user.email "jinliang_guo@outlook.com"
+    - git config user.name "gjl19930713"
+   # Merge with master on CircleCI before running the tests.
+    - git rebase origin/master
+# install dependencies
+dependencies:
+
+
+  pre:
+    - npm install sqlite3
+    - npm install assert
+    - npm install body-parser
+    - npm install bower
+    - npm install cookie-parser
+    - npm install crypto-js
+    - npm install debug
+    - npm install express
+    - npm install express-session
+#    - npm install grunt --save -dev
+#    - npm install grunt-cli --save -dev
+#    - npm install grunt-mocha-test --save -dev
+    - npm install mapbox
+    - npm install mocha
+    - npm install moment
+    - npm install morgan
+    - npm install pug
+    - npm install serve-favicon
+    - npm install session-file-store
+    - npm install socket.io
+    - npm install socketio-auth
+    - npm install expect
+
+    - npm install istanbul --dev
+    - npm install jshint --dev
+    - npm install mocha --save -dev
+    - npm install mocha-circleci-reporter --save -dev
+    - npm install supertest --dev
+
+# run tests
+test:
+  override:
+    - mkdir -p $CIRCLE_TEST_REPORTS/mocha
+    - mkdir $CIRCLE_ARTIFACTS/json_output
+    - grunt coverage
+
+general:
+  artifacts:
+    - "coverage" # relative to the build directory

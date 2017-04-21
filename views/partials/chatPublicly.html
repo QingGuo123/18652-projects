@@ -1,0 +1,205 @@
+<head>
+    <style type="text/css">
+    @charset "UTF-8";
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak,
+    .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+    
+    ng\:form {
+        display: block;
+    }
+    
+    .ng-animate-shim {
+        visibility: hidden;
+    }
+    
+    .ng-anchor {
+        position: absolute;
+    }
+    
+    #navbar {
+        background: -moz-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #008ae6), color-stop(100%, #66c2ff));
+        background: -webkit-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -o-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -ms-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: linear-gradient(to bottom, #008ae6 0%, #66c2ff 100%);
+    }
+    
+    #navBtn1 {
+        font-family: 'Baloo', cursive;
+        font-size: 22px;
+    }
+    
+    #navBtn2 {
+        font-family: 'Baloo', cursive;
+        font-size: 22px;
+    }
+    
+    #navBtn3 {
+        background: -moz-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #008ae6), color-stop(100%, #66c2ff));
+        background: -webkit-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -o-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: -ms-linear-gradient(top, #008ae6 0%, #66c2ff 100%);
+        background: linear-gradient(to bottom, #008ae6 0%, #66c2ff 100%);
+        color: white;
+    }
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="bootstrap-material-design/dist/css/ripples.min.css">
+    <link rel="stylesheet" href="material-design-icons/iconfont/material-icons.css">
+    <link rel="stylesheet" href="bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/icon" href="favicon.ico">
+    <!-- title-->
+    <title>S17-SV2-ESN</title>
+    <!-- additional stylesheets for each page-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="chatPublicly.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Baloo|Roboto" rel="stylesheet">
+    <script src="socket.io-client/socket.io.js"></script>
+</head>
+<body ng-app="ESNApp" id="chatPubliclyBody" style="display: none;">
+<div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="messageid"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" >Contract</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">CONFIRM</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div ui-view class="container-fluid">
+        <div id="landing-navbar" ng-controller="navbarController">
+            <div id="navbar" class="navbar navbar-success">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" data-toggle="collapse" data-target=".navbar-warning-collapse" class="navbar-toggle">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="javascript:void(0)">S17-ESN-SV2</a>
+                    </div>
+                    <div id="navBtn3" class="navbar-collapse navbar-warning-collapse collapse" aria-expanded="false" style="height: 1px;">
+                        <ul class="nav navbar-nav">
+                            <li ng-class="navLobby"><a href="javascript:void(0)" ng-click="landingPage()">Landing</a></li>
+                            <li ng-class="navChatPublicly"><a href="javascript:void(0)">Chat Publicly <span class="badge ng-binding"></span></a></li>
+                            <li ng-class="navNotify"><a href="javascript:void(0)" ng-click="NotifyPage()" data-toggle="modal" data-target="#exampleModal">Notification <span class="badge ng-binding"></span></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li id="search_button"><a href="javascript: void(0)" data-toggle="modal" data-target="#search_modal"><span class="glyphicon glyphicon-search"></span></a></li>
+                            <li><a href="javascript:void(0)">{{curUser}}</a></li>
+                            <li><a id="logout" href="javascript:void(0)" ng-click="logout()">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="announcementPage" ng-controller="announcementPageCtrl" class="container center_div">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12 well">
+                    <h2 id="announcementHeader" align="center">Announcements
+                    </h2>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Search Announcement" aria-describedby="basic-addon1" ng-model="searchAnnouncement">
+                    </div>
+                    <div class="form-group has-feedback has-feedback-left" ng-model="limitNum">
+                        <input id="previousAnnouncements" autocomplete="off" value="Previous" type="submit" ng-click="previousAnnouncement()" class="btn btn-primary btn-block">
+                    </div>
+                    <ul class="list-group">
+                        <li ng-repeat="announcement in announcements | limitTo: limitNum | limitTo: -10 | filter : (stopwords.indexOf(searchAnnouncement) !== -1 ? 'glhhlg' : searchAnnouncement)" class="list-group-item">
+                            <span>{{announcement.username}}</span> posted :
+                            <span>{{announcement.content}}</span>
+                            <b class="badge">{{announcement.location}},  {{announcement.timestamp|date : 'MM/dd/yyyy HH:mm:ss'}}</b>
+                        </li>
+                    </ul>
+                    <div class="form-group has-feedback has-feedback-left" ng-model="limitNum">
+                        <input id="nextAnnouncements" autocomplete="off" value="Next" type="submit" ng-click="nextAnnouncement()" class="btn btn-primary btn-block">
+                    </div>
+                    <form id="announcementForm" name="announcementForm" class="form-horizontal ng-pristine ng-valid">
+                        <div class="form-group has-feedback has-feedback-left is-empty">
+                            <div class="input-group"><span class="input-group-addon"><i class="material-icons">question_answer</i><input name="message" type="text" ng-model="currentAnnouncement" class="form-control ng-pristine ng-untouched ng-valid ng-empty"></span></div>
+                        </div>
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input id="sendAnnouncement" autocomplete="off" value="Post Announcement" type="submit" ng-click="postAnnouncement()" class="btn btn-success btn-block">
+                        </div>
+                        
+                        <div class="btn-group btn-group-justified">
+                            <div class="btn-group">
+                                <!-- ngIf: data.image -->
+                            </div>
+                            <div class="btn-group">
+                                <!-- ngIf: data.image -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="chatPublicly" ng-controller="chatPublicController" class="container center_div">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12 well">
+                <h2 id="charPublicHeader" align="center">Public Chat</h2>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Search Public Message" aria-describedby="basic-addon1" ng-model="searchPubMsg">
+                    </div>
+                    <div class="form-group has-feedback has-feedback-left" ng-model="limitNum">
+                        <input id="previousPublicMsg" autocomplete="off" value="Previous" type="submit" ng-click="previousPublicMsg()" class="btn btn-primary btn-block">
+                    </div>
+                    <ul class="list-group">
+                        <li ng-repeat="message in messages | limitTo: limitNum | limitTo: -10 | filter : (stopwords.indexOf(searchPubMsg) !== -1 ? 'glhhlg' : searchPubMsg)" class="list-group-item">
+                            <span><!-- <img src={{message.status_code}} style="width: 5%;"> -->
+                            <i class="{{message.status_code}}" style="color:{{message.iconcolor}};">  </i>  {{message.username}}</span><b class="badge">{{message.location}}, {{message.timestamp|date : 'MM/dd/yyyy HH:mm:ss'}}</b> said:
+                            <span>{{message.content}}</span>
+                        </li>
+                    </ul>
+                    <div class="form-group has-feedback has-feedback-left" ng-model="limitNum">
+                        <input id="nextPublicMsg" autocomplete="off" value="Next" type="submit" ng-click="nextPublicMsg()" class="btn btn-primary btn-block">
+                    </div>
+                    <form id="chatForm" name="chatForm" class="form-horizontal ng-pristine ng-valid">
+                        <div class="form-group has-feedback has-feedback-left is-empty">
+                            <div class="input-group"><span class="input-group-addon"><i class="material-icons">question_answer</i><input name="message" type="text" ng-model="currentMsg" class="form-control ng-pristine ng-untouched ng-valid ng-empty"></span></div>
+                        </div>
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input id="sendMsg" autocomplete="off" value="Send Message" type="submit" ng-click="sendMessage()" class="btn btn-success btn-block">
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <div class="btn-group">
+                                <!-- ngIf: data.image -->
+                            </div>
+                            <div class="btn-group">
+                                <!-- ngIf: data.image -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
